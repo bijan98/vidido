@@ -1,16 +1,17 @@
 from django import forms
 from polls.models import Choice
 
-class VotingForm(forms.ModelForm):
-    class Meta:
-        model = Choice
-        fields = "__all__"
-        exclude = ['vote','choiceText']
-
-        widgets = {
-            'question' :forms.RadioSelect(attrs={'text':Choice.choiceText})
-
-        }
+class VotingForm(forms.Form):
+    choiceID = forms.IntegerField()
+    # class Meta:
+    #     model = Choice
+    #     fields = "__all__"
+    #     exclude = ['vote']
+    #
+    #     widgets = {
+    #         'question' :forms.RadioSelect(attrs={'text':Choice.choiceText})
+    #
+    #     }
 
         # widgets = {
         #     'bio': forms.Textarea(attrs={

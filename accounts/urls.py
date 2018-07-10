@@ -3,7 +3,7 @@ from django.urls import path
 from django.contrib.auth import views as authView
 from accounts.views import userLogin, signup, register, dashboard, postPublish, getProfile, friendship, breakfriendship
 from django.conf import settings
-from polls.views import showQuestion
+from polls.views import showQuestion,vote
 from django.conf.urls.static import static
 app_name = 'accounts'
 urlpatterns = [
@@ -16,5 +16,6 @@ urlpatterns = [
     path('friendship/',friendship,name='friendship'),
     path('break/', breakfriendship, name='break'),
     path('profile/<username>/<you>', getProfile, name='profile'),
-    path('voting/<username>',showQuestion,name='showquest')
+    path('voting/<username>',showQuestion,name='showquest'),
+    path('vote/<username>',vote,name='vote')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

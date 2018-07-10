@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     {% load static %}
+
     <meta charset="UTF-8">
     <title>polls</title>
 </head>
@@ -15,17 +16,18 @@
         {% endif %}
     </div>
     <div class="col-8 p-4 ">
-        <h2 style="font-family: title-font" class="font-weight-bold"> {{ profile.user.username }}</h2>
-        <p class="jumbotron" ><b>about me...</b><br>{{ form }}</p>
-{#        {% if profile not in yourfreinds %}#}
-{#        <button class="btn btn-success" id="btn-friendship" style="font-family: title-font">#}
-{#            become friend#}
-{#        </button>#}
-{#        {% else %}#}
-{#            <button class="btn btn-danger" id="btn-break" style="font-family: title-font">#}
-{#            break friendship#}
-{#        </button>#}
-{#        {% endif%}#}
+        <h2 style="font-family: title-font" class="center-content font-weight-bold"> {{ profile.user.username }}</h2>
+        <h2 style="font-family: title-font" class="center-content font-weight-bold"> {{ question.questionText }}</h2>
+
+        <form action="/accounts/vote/{{ profile.user.username }}" method="post">
+        {% csrf_token %}
+            {% for choice in choices %}
+                <input type="radio" name="choiceID" value="{{ choice.id }}">{{ choice.choiceText }}
+            {% endfor %}
+
+        <input type="submit">
+        </form>
+
     </div>
 </div>
 </body>

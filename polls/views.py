@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from polls.forms import VotingForm
 # Create your views here.
@@ -28,25 +29,36 @@ def pollPublish(request):
         choice4.save()
 
 
-def vote(request,questionID):
-    if request.method == 'GET':
-        username = request.GET.get('voter')
-        user =  Profile.objects.get(user__username=username)
-        question =  Question.objects.get(pk = questionID)
-        choiceID = request.GET.get('choiceID')
-        choice = Choice.objects.get(pk=choiceID)
-        choice.vote +=1
-        choice.save()
-        log = AnswerLog(question=question,profile=user,choice=choice)
-        log.save()
+def vote(request,username):
+    form = VotingForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            print('-------<>-------')
+            choiceID = form.cleaned_data['choiceID']
+            user = Profile.objects.get(user__username=username)
+            choice = Choice.objects.get(pk=choiceID)
+            choice.vote += 1
+            question = Question.objects.get(pk=choice.question.id)
+            choice.save()
+            log = AnswerLog(question=question, profile=user, choice=choice)
+            log.save()
+            return HttpResponseRedirect('/voting/'+ username)
+
+
+
+
 
 
 def showQuestion(request,username):
     profile = Profile.objects.get(user__username=username)
     questions = Question.objects.exclude(answerlog__profile=profile)
-    finalQuestions = questions.filter(creator__in=profile.friends.all())
-    form = VotingForm()
-    context = { 'form':form}
+    print(questions[0].questionText)
+    finalQuestions = questions.filter(creator__in=profile.friends.all()).all()
+    print('-------------')
+    print(finalQuestions)
+    choices = Choice.objects.filter(question=finalQuestions[0])
+    # form = VotingForm()
+    context = { 'question':finalQuestions[0],'choices':choices,'profile':profile}
     return render(request,'vote.html',context)
 
 
