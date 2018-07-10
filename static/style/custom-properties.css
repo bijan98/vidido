@@ -1,0 +1,62 @@
+{% load bootstrap4 %}
+{% load staticfiles %}
+
+.center-content{
+display: flex;
+justify-content: center;
+}
+
+.side-col{
+border: 0px solid darkviolet;
+border-radius: 5px;
+margin-top: 0rem;
+margin-left: 15px;
+margin-right: 15px;
+padding: 0px;
+    background-color: #eae7dc;
+        box-shadow: 1px -1px 50px #ffa3e3;
+
+}
+.whole-dashboard{
+padding: 20px;
+}
+.col-element{
+        background-color: #eae7dc;
+
+}
+.profile-photo-holder{
+    height: 200px;
+}
+.profile-photo{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 10;
+
+}
+.profile-photo-thumbnail{
+    height: 50px;
+    width: 70px;
+
+}
+.thumbnail-holder{
+    width:100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.post-input-textarea{
+    height: 100px;
+    width: 100%;
+    resize: none;
+    z-index: 100;
+    position:relative;
+    border-radius: 0px;
+    /*background-color: #ffe3f3;*/
+}
+
+.padding-0{
+    padding-right:0;
+    padding-left:0;
+}
