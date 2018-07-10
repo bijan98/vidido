@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>polls</title>
+</head>
+<body>
+<div class="row jumbotron p-3 no-gutters center-content">
+    <div class="col-4">
+        {% if profile.profile_photo != null %}
+        <img src="{{ profile.profile_photo.url }}" class="mr-4 profile-photo">
+        {% else %}
+        <img src="{% static 'facebook-avatar.jpg'  %}" class="profile-photo">
+        {% endif %}
+    </div>
+    <div class="col-8 p-4 ">
+        <h2 style="font-family: title-font" class="font-weight-bold"> {{ profile.user.username }}</h2>
+        <p class="jumbotron" ><b>about me...</b><br>{{ form }}</p>
+{#        {% if profile not in yourfreinds %}#}
+{#        <button class="btn btn-success" id="btn-friendship" style="font-family: title-font">#}
+{#            become friend#}
+{#        </button>#}
+{#        {% else %}#}
+{#            <button class="btn btn-danger" id="btn-break" style="font-family: title-font">#}
+{#            break friendship#}
+{#        </button>#}
+{#        {% endif%}#}
+    </div>
+</div>
+</body>
+</html>

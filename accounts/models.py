@@ -3,6 +3,7 @@ from django.db import models
 # from django.contrib.auth import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+# from polls.models import Question
 from django.urls import reverse_lazy
 # from django.db import models as dbModel
 # Create your models here.
@@ -17,6 +18,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=10, choices=[
         ('male', 'male'), ('female' , 'female'), ('other', 'other') ,('alien', 'alien')])
     friends = models.ManyToManyField('self', db_index=True, related_name='friends')
+    # answeredPolls = models.ManyToManyField(Question,db_index=True,related_name='answeredPolls')
 
     def __str__(self):
         return self.user.username
